@@ -9,6 +9,7 @@ import {
   ShieldCheck,
   ChevronLeft,
   ChevronRight,
+  Github,
 } from "lucide-react";
 import { LotusMark } from "@/components/ui/LotusMark";
 
@@ -266,6 +267,11 @@ export default function Landing() {
     : navDark
       ? "border-b border-black/10 bg-transparent"
       : "border-b border-white/15 bg-transparent";
+  const navGhost = scrolled
+    ? "border-white/15 bg-white/5 text-white/85 hover:border-white/35 hover:bg-white/15 hover:text-white"
+    : navDark
+      ? "border-black/15 bg-white/40 text-[#173042] backdrop-blur-sm hover:bg-white/70"
+      : "border-white/25 bg-black/25 text-white backdrop-blur-sm hover:bg-black/45";
 
   return (
     <div className="min-h-screen bg-paper text-ink">
@@ -290,6 +296,16 @@ export default function Landing() {
             </span>
           </Link>
           <div className="ml-auto flex items-center gap-3">
+            <a
+              href="https://github.com/aaravshirpurkar/SaundaryaStudio"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Saundarya Studio on GitHub"
+              title="View source on GitHub"
+              className={`flex h-10 w-10 items-center justify-center rounded-lg border transition-all duration-300 ${navGhost}`}
+            >
+              <Github size={17} />
+            </a>
             <Link
               href="/studio"
               onPointerEnter={prefetchStudio}
