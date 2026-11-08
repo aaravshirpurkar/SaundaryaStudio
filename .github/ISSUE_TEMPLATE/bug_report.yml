@@ -1,0 +1,37 @@
+name: Bug report
+description: Report something that doesn't work as expected
+labels: [bug]
+body:
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: Describe the bug
+      description: A clear, concise description of what went wrong.
+      placeholder: The exported SVG renders blank in Firefox...
+    validations:
+      required: true
+  - type: textarea
+    id: repro
+    attributes:
+      label: Steps to reproduce
+      value: |
+        1. Open the Studio
+        2. Set effect to ...
+        3. ...
+    validations:
+      required: true
+  - type: textarea
+    id: params
+    attributes:
+      label: Effect + parameters
+      description: Which engine, and the palette / slider values that trigger it. A shared preset URL is ideal.
+  - type: input
+    id: browser
+    attributes:
+      label: Browser, version and OS
+      placeholder: Chrome 130 on Windows 11
+  - type: textarea
+    id: media
+    attributes:
+      label: Sample asset
+      description: The image, video or webcam input involved, if relevant.
