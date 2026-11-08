@@ -3,6 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "description": "Client-side visual engineering studio for dithered, ASCII, halftone/risograph and noisy gradient mesh media.",
+  "engines": {
+    "node": ">=18.17"
+  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",
