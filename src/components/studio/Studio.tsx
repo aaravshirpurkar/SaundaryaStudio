@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import dynamic from "next/dynamic";
 import { useStudioStore } from "@/store/useStudioStore";
 import { ASSET_LIBRARY, getAsset } from "@/data/assetLibrary";
 import { type ActiveEffect, type ComparisonMode } from "@/types/studio";
@@ -8,8 +9,13 @@ import { TopNavbar } from "./TopNavbar";
 import { LeftSidebar } from "./LeftSidebar";
 import { CenterViewport } from "./CenterViewport";
 import { RightInspector } from "./RightInspector";
-import { ExportModal } from "./ExportModal";
 import { getRendererHandle } from "@/engine/StudioRenderer";
+
+// Exporters + code viewer are only needed when the dialog opens; keep them out
+// of the studio's critical first-paint bundle so navigation feels instant.
+const ExportModal = dynamic(() => import("./ExportModal").then((m) => m.ExportModal), {
+  ssr: false,
+});
 
 const EFFECT_KEYS: Record<string, ActiveEffect> = {
   "1": "dither",

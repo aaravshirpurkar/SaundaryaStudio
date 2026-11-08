@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import {
   ArrowRight,
   Shuffle,
@@ -133,6 +134,16 @@ export default function Landing() {
   const imgRefs = useRef<(HTMLImageElement | null)[]>([]);
   const heroRef = useRef<HTMLElement | null>(null);
   const sampleCanvas = useRef<HTMLCanvasElement | null>(null);
+
+  // Warm the studio route as soon as the landing paints so "Open / Enter the
+  // Studio" navigates instantly instead of compiling/loading on click.
+  const router = useRouter();
+  const prefetchStudio = useCallback(() => {
+    router.prefetch("/studio");
+  }, [router]);
+  useEffect(() => {
+    prefetchStudio();
+  }, [prefetchStudio]);
 
   const shuffle = () => {
     setIndex((prev) => {
@@ -281,6 +292,8 @@ export default function Landing() {
           <div className="ml-auto flex items-center gap-3">
             <Link
               href="/studio"
+              onPointerEnter={prefetchStudio}
+              onFocus={prefetchStudio}
               className="flex h-10 items-center gap-2 rounded-lg bg-coral px-4 text-sm font-semibold text-oncoral shadow-glow-coral transition-all hover:bg-coral/90"
             >
               Open Studio <ArrowRight size={15} />
@@ -364,6 +377,8 @@ export default function Landing() {
           <div className="rise mt-8 flex flex-wrap items-center justify-center gap-3" style={{ animationDelay: "0.5s" }}>
             <Link
               href="/studio"
+              onPointerEnter={prefetchStudio}
+              onFocus={prefetchStudio}
               className="flex h-11 items-center gap-2 rounded-lg bg-coral px-6 text-sm font-semibold text-oncoral shadow-glow-coral transition-all hover:bg-coral/90 hover:shadow-glow-peach"
             >
               Enter the Studio <ArrowRight size={15} />
